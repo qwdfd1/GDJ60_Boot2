@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+//***-context.xml을 대신함
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
 
@@ -16,6 +17,8 @@ public class WebConfig implements WebMvcConfigurer{
 	
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		//<resources mapping="/resources/**" location="/resources/ />
+		//<resources mapping="/file/**" location="D:/production/upload />
 		registry.addResourceHandler(urlPath)
 			.addResourceLocations(basePath);
 	}
