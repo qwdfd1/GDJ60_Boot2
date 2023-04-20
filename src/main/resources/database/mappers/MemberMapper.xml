@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.onion.base.member.MemberDAO">
+  		
+  		<select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
+  			SELECT M.USERNAME, M.EMAIL, R.NUM, R.ROLENAME FROM MEMBER M
+  			INNER JOIN
+  			MEMBERROLE MR
+  			ON(M.USERNAME = MR.USERNAME)
+  			INNER JOIN
+  			ROLE R
+  			ON (MR.NUM = R.NUM)
+  			WHERE M.USERNAME = #{userName}
+  			AND M.PASSWORD = #{password}
+  		</select>
+  		
+  		<resultMap type="MemberVO" id="getLoginResult">
+  			<id property="userName" column="USERNAME"/>
+  			<result property="email" column="EMAIL"/>
+  			<collection property="roleVOs" javaType="List" ofType="RoleVO">
+  				<id property="num" column="NUM"/>
+  				<result property="roleName" column="ROLENAME"/>
+  			</collection>
+  		</resultMap>
+  		
+  		<insert id="setJoin" parameterType="MemberVO">
+  			INSERT INTO MEMBER (USERNAME, PASSWORD, NAME, EMAIL, BIRTH, ENABLED)
+  			VALUES (#{userName}, #{password}, #{name}, #{email}, #{birth}, 1)
+  		</insert>
+  		
+  		<select id="getRoleNum" parameterType="RoleVO" resultType="RoleVO">
+  				SELECT NUM FROM ROLE 
+  				WHERE ROLENAME = #{roleName}
+  		</select>
+  		
+  		<insert id="setMemberRoleInsert" parameterType="MemberRoleVO">
+  			INSERT INTO MEMBERROLE (USERNAME, NUM)
+  			VALUES (#{userName}, #{num})
+  		</insert>
+  		
+  		
+  
+  </mapper>

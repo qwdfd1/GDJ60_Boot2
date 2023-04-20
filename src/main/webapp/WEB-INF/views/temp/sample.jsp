@@ -10,7 +10,7 @@
         <meta name="author" content="" />
         <title>Modern Business - Start Bootstrap Template</title>
         <!-- css Favicon-->
-        <c:import url="./temp/style.jsp"></c:import>
+        <c:import url="../temp/style.jsp"></c:import>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>

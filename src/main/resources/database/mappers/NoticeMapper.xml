@@ -14,7 +14,7 @@
 				CONTENTS LIKE CONCAT('%', #{search}, '%')
 			</if>
 			<if test="kind == 'writer'">
-				writer LIKE CONCAT('%', #{search}, '%')
+				WRITER LIKE CONCAT('%', #{search}, '%')
 			</if>
 		</where>
 	</sql>
@@ -23,6 +23,7 @@
  		INSERT INTO NOTICE (NUM, WRITER, TITLE, CONTENTS, REGDATE, HIT)
  		VALUES (#{num}, #{writer}, #{title}, #{contents}, now(), 0)
  	</insert>
+
  	
  	<update id="setUpdate" parameterType="BoardVO">
  		UPDATE NOTICE SET TITLE = #{title}, CONTENTS = #{contents}

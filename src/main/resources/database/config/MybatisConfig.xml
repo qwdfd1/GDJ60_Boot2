@@ -8,6 +8,14 @@
   		<typeAlias type="com.onion.base.board.BoardVO" alias="BoardVO"/>
   		<typeAlias type="com.onion.base.board.BoardFileVO" alias="BoardFileVO"/>
   		<typeAlias type="com.onion.base.board.notice.NoticeVO" alias="NoticeVO"/>
+  		<typeAlias type="com.onion.base.board.qna.QnaVO" alias="QnaVO"/>
+  		
+  		
+  		<typeAlias type="com.onion.base.member.MemberVO" alias="MemberVO"/>
+  		<typeAlias type="com.onion.base.member.RoleVO" alias="RoleVO"/>
+  		<typeAlias type="com.onion.base.member.MemberRoleVO" alias="MemberRoleVO"/>
+  		
+  		
   		
   		<typeAlias type="com.onion.base.util.Pager" alias="Pager"/>
   	</typeAliases>
