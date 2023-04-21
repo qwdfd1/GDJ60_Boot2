@@ -1,5 +1,8 @@
 package com.onion.base.member;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +10,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
+@Slf4j
 @RequestMapping("/member/*")
 public class MemberController {
 
@@ -53,10 +60,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("join")
-	public ModelAndView setJoin(ModelAndView mv, MemberVO memberVO, RoleVO roleVO) throws Exception {
+	public ModelAndView setJoin(ModelAndView mv, MemberVO memberVO) throws Exception {
 		
 		
-		int result = memberService.setJoin(memberVO, roleVO);
+		int result = memberService.setJoin(memberVO);
 		
 		mv.setViewName("redirect:./join");
 		if(result > 0) {
@@ -66,6 +73,22 @@ public class MemberController {
 		
 		return mv;
 	}
+	
+	@GetMapping("admin")
+	public void getAdmin()throws Exception {}
+	
+	@GetMapping("mypage")
+	public void getMyPage()throws Exception {}
+	
+	@GetMapping("idDuplicateCheck")
+	@ResponseBody
+	public boolean IdDuplicateCheck(MemberVO memberVO)throws Exception {
+		
+		return memberService.idDuplicateCheck(memberVO);
+		
+	}
+	
+	
 	
 	
 }

@@ -48,7 +48,7 @@
                                 </div>
                                 <!-- Writer input-->
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="writer"  name="writer" data-sb-validations="required,email" />
+                                    <input class="form-control" id="writer"  name="writer" value="${member.writer}" data-sb-validations="required,email" />
                                     <label for="writer">Writer</label>
                                     <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
                                     <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>

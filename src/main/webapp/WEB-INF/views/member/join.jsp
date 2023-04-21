@@ -41,33 +41,45 @@
                                 <form id="contactForm" action="./join" method="post" data-sb-form-api-token="API_TOKEN">
                                       <!-- USERNAME input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="userName" type="text" name="userName" data-sb-validations="required" />
+                                        <input class="form-control" id="userName" type="text" name="userName" required="required" data-sb-validations="required" />
                                         <label for="userName">UserName</label>
                                         <div class="invalid-feedback" data-sb-feedback="userName:required">A name is required.</div>
+                                        <p class="mt-1 check"></p>
                                     </div>
                                      <!-- Password input-->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="password" type="password" name="password" data-sb-validations="required" />
                                         <label for="password">Password</label>
                                         <div class="invalid-feedback" data-sb-feedback="password:required">A name is required.</div>
-                                    </div>    
+                                        <p class="mt-1 check"></p>
+                                    </div>
+                                    <!-- Password CHECK input-->
+                                    <div class="form-floating mb-3">
+                                        <input class="form-control" id="passwordCheck" type="password" name="passwordCheck" data-sb-validations="required" />
+                                        <label for="passwordCheck">Password Check</label>
+                                        <div class="invalid-feedback" data-sb-feedback="password:required">A name is required.</div>
+                                        <p class="mt-1 check"></p>
+                                    </div>     
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="name" name="name" type="text" data-sb-validations="required" />
                                         <label for="name">Name</label>
                                         <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
+                                        <p class="mt-1 check"></p>
                                     </div>
                                     <!-- Email input-->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="email" name="email" type="email" data-sb-validations="required" />
                                         <label for="email">Email</label>
                                         <div class="invalid-feedback" data-sb-feedback="email:required">A name is required.</div>
+                                        <p class="mt-1 check"></p>
                                     </div>
-                                    <!-- Email input-->
+                                    <!-- Birth input-->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="birth" name="birth" type="date" data-sb-validations="required" />
                                         <label for="birth">Birth</label>
                                         <div class="invalid-feedback" data-sb-feedback="email:required">A birth is required.</div>
+                                        <p class="mt-1 check"></p>
                                     </div>
                                     <!-- Submit success message-->
                                     <!---->
@@ -88,7 +100,7 @@
                                     <div class="d-none" id="submitErrorMessage"><div class="text-center text-danger mb-3">Error sending message!</div></div>
                                     <!-- Submit Button-->
                                     <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button></div>
-                                    <input type="hidden" name="roleName" value="ROLE_MEMBER">
+                                    
                                 </form>
                             </div>
                         </div>
@@ -99,5 +111,7 @@
         <!-- Footer 적용 -->
         <c:import url="../temp/footer.jsp"></c:import>
         <!-- Footer 끝 -->
+        
+        <script type="text/javascript" src="../js/joinForm.js"></script>
 </body>
 </html>

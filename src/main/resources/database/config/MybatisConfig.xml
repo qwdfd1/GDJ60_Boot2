@@ -13,10 +13,7 @@
   		
   		<typeAlias type="com.onion.base.member.MemberVO" alias="MemberVO"/>
   		<typeAlias type="com.onion.base.member.RoleVO" alias="RoleVO"/>
-  		<typeAlias type="com.onion.base.member.MemberRoleVO" alias="MemberRoleVO"/>
-  		
-  		
-  		
+
   		<typeAlias type="com.onion.base.util.Pager" alias="Pager"/>
   	</typeAliases>
   </configuration>
