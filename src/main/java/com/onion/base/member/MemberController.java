@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,13 +56,22 @@ public class MemberController {
 	}
 	
 	@GetMapping("join")
-	public ModelAndView setJoin(ModelAndView mv) throws Exception {
+	public ModelAndView setJoin(ModelAndView mv, MemberVO memberVO) throws Exception {
 		mv.setViewName("member/join");
 		return mv;
 	}
 	
 	@PostMapping("join")
-	public ModelAndView setJoin(ModelAndView mv, MemberVO memberVO) throws Exception {
+	public ModelAndView setJoin(ModelAndView mv, @Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
+		
+		boolean check = memberService.memberCheck(memberVO, bindingResult);
+		
+		if(check) {
+			log.warn("==============검증 실패==========");
+			mv.setViewName("member/join");
+			return mv;
+			
+		}
 		
 		
 		int result = memberService.setJoin(memberVO);
@@ -87,6 +98,8 @@ public class MemberController {
 		return memberService.idDuplicateCheck(memberVO);
 		
 	}
+	
+
 	
 	
 	

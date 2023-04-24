@@ -17,6 +17,7 @@
   			AND M.PASSWORD = #{password}
   		</select>
   		
+  		
   		<resultMap type="MemberVO" id="getLoginResult">
   			<id property="userName" column="USERNAME"/>
   			<result property="email" column="EMAIL"/>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,23 +40,24 @@
                             <!-- To make this form functional, sign up at-->
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
-                            <form id="contactForm" action="./add" method="post" enctype="multipart/form-data" data-sb-form-api-token="API_TOKEN" >
+                            
+                            	<form:form id="contactForm" action="./add" method="post" modelAttribute="boardVO" enctype="multipart/form-data" data-sb-form-api-token="API_TOKEN" >
                                 <!-- Title input-->
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="title" type="text" placeholder="Enter Title..." name="title" data-sb-validations="required" />
+                                    <!-- path : modelAttribute로 받은 속성값의 setter/getter 이름을 적어줌 -->
+                                    <form:input path="title" id="title" cssClass="form-control"/>
                                     <label for="title">Title</label>
-                                    <div class="invalid-feedback" data-sb-feedback="title:required">A name is required.</div>
+                                    <form:errors path="title" cssStyle="color : red;"></form:errors>
                                 </div>
                                 <!-- Writer input-->
                                 <div class="form-floating mb-3">
-                                    <input class="form-control" id="writer"  name="writer" value="${member.writer}" data-sb-validations="required,email" />
+                                    <form:input path="writer" id="writer" cssClass="form-control" />
                                     <label for="writer">Writer</label>
-                                    <div class="invalid-feedback" data-sb-feedback="email:required">An email is required.</div>
-                                    <div class="invalid-feedback" data-sb-feedback="email:email">Email is not valid.</div>
+									<form:errors path="writer" cssStyle="color : red;"></form:errors>
                                 </div>
                                 <!-- Contents input-->
                                 <div class="form-floating mb-3">
-                                    <textarea class="form-control" id="contents" name="contents" placeholder="Enter your message here..." style="height: 10rem" data-sb-validations="required"></textarea>
+                                    <form:textarea path="contents" id="contents" cssClass="form-control" cssStyle="height : 10rem;"/>
                                     <label for="contents">Contents</label>
                                     <div class="invalid-feedback" data-sb-feedback="message:required">A message is required.</div>
                                 </div>
@@ -73,8 +75,9 @@
 
                 
                                 <!-- Submit Button-->
-                                <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="button">Submit</button></div>
-                            </form>
+                                <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button></div>
+                                </form:form> 
+  
                         </div>
                     </div>
                 </div>
@@ -105,7 +108,7 @@
         </section>
         <!-- Footer 적용 -->
         <c:import url="../temp/footer.jsp"></c:import>
-      	<script src="../js/boardForm.js"></script>
+      	<!-- <script src="../js/boardForm.js"></script> -->
       	<script src="../js/fileManager.js"></script>
         <!-- Footer 끝 -->
         

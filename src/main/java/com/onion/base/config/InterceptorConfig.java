@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 import com.onion.base.interceptors.AdminCheckInterceptor;
 import com.onion.base.interceptors.MemberCheckInterceptor;
@@ -19,29 +20,39 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	@Autowired
 	private AdminCheckInterceptor adminCheckInterceptor;
 	
+	@Autowired
+	private LocaleChangeInterceptor localeChangeInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
 		//인터셉터 등록시 순서도 중요하다 위에서부터 아래로
 		
-		registry.addInterceptor(memberCheckInterceptor)
-				.addPathPatterns("/member/mypage")
-				.addPathPatterns("/qna/*")
-				.excludePathPatterns("/qna/list")
-				.excludePathPatterns("/qna/detail")
-				.addPathPatterns("/member/admin")
-				.addPathPatterns("/notice/*")
-				.excludePathPatterns("/notice/list")
-				.excludePathPatterns("/notice/detail")
-				
+		registry.addInterceptor(localeChangeInterceptor)
+				.addPathPatterns("/**")
 				;
 				
-		registry.addInterceptor(adminCheckInterceptor)
-				.addPathPatterns("/member/admin")
-				.addPathPatterns("/notice/*")
-				.excludePathPatterns("/notice/list")
-				.excludePathPatterns("/notice/detail")
-				;
+		
+//		registry.addInterceptor(memberCheckInterceptor)
+//				.addPathPatterns("/member/mypage")
+//				.addPathPatterns("/qna/*")
+//				.excludePathPatterns("/qna/list")
+//				.excludePathPatterns("/qna/detail")
+//				.addPathPatterns("/member/admin")
+//				.addPathPatterns("/notice/*")
+//				.excludePathPatterns("/notice/list")
+//				.excludePathPatterns("/notice/detail")
+//				
+//				;
+				
+//		registry.addInterceptor(adminCheckInterceptor)
+//				.addPathPatterns("/member/admin")
+//				.addPathPatterns("/notice/*")
+//				.excludePathPatterns("/notice/list")
+//				.excludePathPatterns("/notice/detail")
+//				;
+//		
+	
 	}
 	
 	

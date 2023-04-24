@@ -76,6 +76,12 @@
 		    <artifactId>spring-boot-starter-aop</artifactId>
 				<!-- 버전 생략 -->
 		</dependency>
+			
+		<!--Form 검증 -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-validation</artifactId>
+		</dependency>
 		
 	</dependencies>
 
