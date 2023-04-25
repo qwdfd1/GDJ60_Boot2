@@ -55,33 +55,6 @@
                                     <label for="writer">Writer</label>
 									<form:errors path="writer" cssStyle="color : red;"></form:errors>
                                 </div>
-                                
-                                <!-- Writer input-->
-                                <div class="form-floating mb-3">
-                                    <form:input path="subVO.subName" id="writer" cssClass="form-control" />
-                                    <label for="writer">subName</label>
-                                </div>
-	                            <!-- Writer input-->
-                                <div class="form-floating mb-3">
-                                    <form:input path="names" id="writer" cssClass="form-control" />
-                                    <label for="writer">Names</label>
-                                </div>
-                                <!-- Writer input-->
-                                <div class="form-floating mb-3">
-                                    <form:input path="names" id="writer" cssClass="form-control" />
-                                    <label for="writer">Names</label>
-                                </div>
-                                
-                                <!-- Writer input-->
-                                <div class="form-floating mb-3">
-                                    <form:input path="boardFileVOs[1].fileName" id="writer" cssClass="form-control" />
-                                    <label for="writer">BoardFileName</label>
-                                </div>
-                                <!-- Writer input-->
-                                <div class="form-floating mb-3">
-                                    <form:input path="boardFileVOs[4].fileName" id="writer" cssClass="form-control" />
-                                    <label for="writer">BoardFileName</label>
-                                </div>
                                 <!-- Contents input-->
                                 <div class="form-floating mb-3">
                                     <form:textarea path="contents" id="contents" cssClass="form-control" cssStyle="height : 10rem;"/>
