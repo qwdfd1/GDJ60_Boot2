@@ -22,6 +22,10 @@ public class BoardVO {
 	private String contents;
 	private Date regDate;
 	private Long hit;
+	private SubVO subVO;
+	private List<String> names;
+	
+	
 	private List<BoardFileVO> boardFileVOs;
 	
 }
