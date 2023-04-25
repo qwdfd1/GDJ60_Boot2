@@ -78,4 +78,9 @@
  		INSERT INTO NOTICEFILES (NUM, FILENAME, ORINAME)
  		VALUES (#{num}, #{fileName}, #{oriName})
  	</insert>
+ 	
+ 	<delete id="setFileListDelete" parameterType="BoardVO">
+ 		DELETE FROM NOTICEFILES WHERE NUM = #{num}
+ 	</delete>
+ 	
  </mapper>

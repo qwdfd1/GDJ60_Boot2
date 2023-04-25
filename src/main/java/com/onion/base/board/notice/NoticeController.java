@@ -81,13 +81,23 @@ public class NoticeController {
 			return mv;
 		}
 		
-		for (MultipartFile multipartFile : boardFiles) {			log.info("OrinalName : {} Size: {}", multipartFile.getOriginalFilename(), multipartFile.getSize());
+		for (MultipartFile multipartFile : boardFiles) {			
+			log.info("OrinalName : {} Size: {}", multipartFile.getOriginalFilename(), multipartFile.getSize());
 		}
 		
 		
 		int result = noticeService.setInsert(boardVO, boardFiles);
 		
 		mv.setViewName("redirect:./list");
+		
+		return mv;
+	}
+	
+	@PostMapping("delete")
+	public ModelAndView setDelete(ModelAndView mv, BoardVO boardVO) throws Exception {
+		
+		mv.setViewName("redirect:./list");
+		int result = noticeService.setDelete(boardVO);
 		
 		return mv;
 	}

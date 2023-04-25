@@ -53,10 +53,8 @@ public class NoticeService implements BoardService {
 		int result= noticeDAO.setInsert(boardVO);
 		log.error("NUM =======> {}", boardVO.getNum());
 		
-		Random random = new Random();
-		int num = random.nextInt(1);
 		
-		if (num == 0) {
+		if (result == 0) {
 			throw new Exception();
 		}
 		
@@ -85,8 +83,21 @@ public class NoticeService implements BoardService {
 
 	@Override
 	public int setDelete(BoardVO boardVO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		int result = noticeDAO.setFileListDelete(boardVO);
+		
+		if (result == 0) {
+			throw new Exception();
+		}
+		
+		result = noticeDAO.setDelete(boardVO);
+		
+		if (result == 0) {
+			throw new Exception();
+		}
+		
+		
+		return result;
 	}
 
 	@Override

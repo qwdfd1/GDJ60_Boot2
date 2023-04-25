@@ -98,6 +98,16 @@
                                     </div>
                                 </div>
                             </section>
+                            <div class="d-flex justify-content-between">
+	                            <form action="./update" method="post">
+	                            	<button class="btn btn-outline-primary" type="submit">UPDATE</button>
+	                            	<input type="hidden" value="${boardVO.num }" name="num">
+	                            </form>
+	                            <form action="./delete" method="post" >
+	                            	<button class="btn btn-outline-danger" type="submit">DELETE</button>
+	                            	<input type="hidden" value="${boardVO.num}" name="num">
+	                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>
