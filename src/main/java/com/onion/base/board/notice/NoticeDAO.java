@@ -10,4 +10,6 @@ public interface NoticeDAO extends BoardDAO {
 	public int setDelete(BoardVO boardVO) throws Exception;
 	
 	public int setFileListDelete(BoardVO boardVO) throws Exception;
+	
+	public int setBirthUserInsert() throws Exception;
 }

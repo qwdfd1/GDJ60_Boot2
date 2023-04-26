@@ -47,6 +47,27 @@
   			WHERE USERNAME = #{userName}
   		</select>
   		
+  		<select id="getMemberList" resultType="MemberVO">
+  				SELECT * FROM MEMBER
+  		</select>
+  		
+  		<update id="setLastTimeUpdate" parameterType="MemberVO">
+  			UPDATE MEMBER SET LASTTIME = now()
+  			WHERE USERNAME = #{userName}
+  		</update>
+  		
+  		<update id="setEnabledUpdate">
+  			UPDATE MEMBER SET ENABLED = 0
+			WHERE LASTTIME <![CDATA[<]]> SUBDATE(now(), INTERVAL 3 DAY)
+  		</update>
+  		
+  		<select id="getBirth" resultType="MemberVO">
+		 	SELECT NAME, EMAIL FROM MEMBER
+		 	WHERE DATE_FORMAT(BIRTH, '%m-%d')  = DATE_FORMAT(NOW(), '%m-%d')
+  		</select>
+  		
+
+  		
   		
   
   </mapper>

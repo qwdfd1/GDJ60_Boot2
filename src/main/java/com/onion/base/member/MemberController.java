@@ -47,9 +47,12 @@ public class MemberController {
 	
 	@GetMapping("logout")
 	public ModelAndView getLogout(ModelAndView mv, HttpSession session) throws Exception {
-	
-		session.invalidate();
-		
+			
+		int result = memberService.setLastTimeUpdate(session);
+		if(result > 0) {
+			session.invalidate();
+		}
+
 		mv.setViewName("redirect:../");
 		
 		return mv;

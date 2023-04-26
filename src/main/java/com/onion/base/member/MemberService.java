@@ -4,6 +4,8 @@ import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,13 @@ public class MemberService {
 	
 	public MemberVO getLogin(MemberVO memberVO) throws Exception {
 		return memberDAO.getLogin(memberVO);
+	}
+	
+	public int setLastTimeUpdate(HttpSession session) throws Exception {
+		MemberVO memberVO = (MemberVO)session.getAttribute("member");
+		memberVO.setUserName(memberVO.getUserName());
+
+		return memberDAO.setLastTimeUpdate(memberVO);
 	}
 	
 	public int setJoin(MemberVO memberVO) throws Exception {
