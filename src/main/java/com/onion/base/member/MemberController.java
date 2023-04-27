@@ -135,6 +135,8 @@ public class MemberController {
 		
 		boolean check = memberService.findPasswordCheck(memberVO, bindingResult);
 		
+		mv.setViewName("member/login");
+		
 		if(check) {
 			log.warn("==============검증 실패==========");
 			mv.setViewName("member/findPassword");

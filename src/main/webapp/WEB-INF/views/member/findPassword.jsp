@@ -54,6 +54,8 @@
                                         <form:label path="email">Email</form:label>
                                         <form:errors path="email" cssStyle="color : red;"></form:errors>
                                     </div>
+                                    
+
           
                                     <!-- Submit success message-->
                                     <!---->

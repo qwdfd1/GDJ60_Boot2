@@ -118,10 +118,9 @@ public class MemberService implements UserDetailsService {
 	public boolean findPasswordCheck(MemberVO memberVO, BindingResult bindingResult) throws Exception {
 		boolean result = false;
 		
-		MemberVO tempUser = memberDAO.getFindPassword();
+		MemberVO tempUser = memberDAO.getFindPassword(memberVO);
 		
-		log.error("======== USERNAME  : {} ========", tempUser.getUsername());
-		log.error("======== USEREMAIL  : {} ========", tempUser.getEmail());
+
 		
 		if(tempUser == null) {
 			
@@ -168,7 +167,15 @@ public class MemberService implements UserDetailsService {
 		
 		log.error("======== Temp Password : {} ========", sb.toString());
 		
-		return 0;
+		memberVO.setPassword(passwordEncoder.encode(sb.toString()));
+		
+		int result = memberDAO.setTempPasswordUpdate(memberVO);
+		
+		if(result > 0) {
+			mailManager.send(memberVO.getEmail(), "임시 비밀번호 재발급이용", "임시 비밀번호 : " + sb.toString());
+		}
+		
+		return result;
 		
 	}
 	

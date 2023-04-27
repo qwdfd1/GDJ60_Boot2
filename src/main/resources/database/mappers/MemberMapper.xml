@@ -71,6 +71,11 @@
   			WHERE USERNAME = #{username} AND EMAIL = #{email}
   		</select>
   		
+  		<update id="setTempPasswordUpdate" parameterType="MemberVO">
+  			UPDATE MEMBER SET PASSWORD = #{password}
+  			WHERE USERNAME = #{username}
+  		</update>
+  		
 
   		
   		
