@@ -41,8 +41,8 @@
                                 <form id="contactForm" action="/member/login" method="post" data-sb-form-api-token="API_TOKEN">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="userName" type="text" name="userName" data-sb-validations="required" />
-                                        <label for="userName">USERNAME</label>
+                                        <input class="form-control" id="userName" type="text" name="username" data-sb-validations="required" />
+                                        <label for="username">USERNAME</label>
                                         <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                                     </div>
                                     <!-- Name input-->
@@ -71,6 +71,10 @@
                                     <!-- Submit Button-->
                                     <div class="d-grid"><button class="btn btn-primary btn-lg" id="submitButton" type="submit">Submit</button></div>
                                 </form>
+                                
+                                <div class="d-flex justify-content-end my-3">
+                                	<a class="btn btn-primary btn-md" href="./findPassword">Forgot Password</a>
+                                </div>
                             </div>
                         </div>
                     </div>

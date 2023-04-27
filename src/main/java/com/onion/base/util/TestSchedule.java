@@ -59,8 +59,6 @@ public class TestSchedule {
 		//생일자리스트 정보
 		List<MemberVO> list = memberDAO.getBirth();
 		
-		//
-		String [] receiveList = new String[list.size()];
 		
 		StringBuffer sb = new StringBuffer();
 		

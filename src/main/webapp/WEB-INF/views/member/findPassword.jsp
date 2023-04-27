@@ -20,7 +20,7 @@
             <!-- Navigation 적용 -->
 				<c:import url="../temp/header.jsp"></c:import>
             <!-- Header-->
- 		           <!-- Page content-->
+ 					           <!-- Page content-->
             <section class="py-5">
                 <div class="container px-5">
                     <!-- Contact form-->
@@ -40,7 +40,7 @@
                                 <!-- https://startbootstrap.com/solution/contact-forms-->
                                 <!-- to get an API token!-->
                                 
-                                <form:form id="contactForm" action="./join" method="post" modelAttribute="memberVO" data-sb-form-api-token="API_TOKEN">
+                                <form:form id="contactForm" action="./findPassword" method="post" modelAttribute="memberVO" data-sb-form-api-token="API_TOKEN">
                                 
                                       <!-- USERNAME input-->
                                     <div class="form-floating mb-3">
@@ -48,36 +48,13 @@
                                         <form:label path="username">userName</form:label>
                                         <form:errors path="username" cssStyle="color : red;"></form:errors>
                                     </div>
-                                     <!-- Password input-->
-                                    <div class="form-floating mb-3">
-                                        <form:password path="password" id="password" cssClass="form-control"/>
-                                        <form:label path="password">password</form:label>
-                                        <form:errors path="password" cssStyle="color : red;"></form:errors>
-                                    </div>
-                                    <!-- Password CHECK input-->
-                                    <div class="form-floating mb-3">
-                                        <form:password path="passwordCheck" id="passwordCheck" cssClass="form-control"/>
-                                        <form:label path="passwordCheck">password Check</form:label>
-                                        <form:errors path="passwordCheck" cssStyle="color : red;"></form:errors>
-                                    </div>     
-                                    <!-- Name input-->
-                                    <div class="form-floating mb-3">
-                                        <form:input path="name" id="name" cssClass="form-control"/>
-                                        <form:label path="name">name</form:label>
-                                        <form:errors path="name" cssStyle="color : red;"></form:errors>
-                                    </div>
                                     <!-- Email input-->
                                     <div class="form-floating mb-3">
                                         <form:input path="email" id="email" cssClass="form-control"/>
                                         <form:label path="email">Email</form:label>
                                         <form:errors path="email" cssStyle="color : red;"></form:errors>
                                     </div>
-                                    <!-- Birth input-->
-                                    <div class="form-floating mb-3">
-                                        <input class="form-control" id="birth" name="birth" type="date" data-sb-validations="required" />
-                                        <label for="birth">Birth</label>
-                                        <form:errors path="birth"></form:errors>
-                                    </div>
+          
                                     <!-- Submit success message-->
                                     <!---->
                                     <!-- This is what your users will see when the form-->
@@ -108,7 +85,5 @@
         <!-- Footer 적용 -->
         <c:import url="../temp/footer.jsp"></c:import>
         <!-- Footer 끝 -->
-        
-        <script type="text/javascript" src="../js/joinForm.js"></script>
 </body>
 </html>

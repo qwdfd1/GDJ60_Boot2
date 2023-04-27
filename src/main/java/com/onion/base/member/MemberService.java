@@ -1,25 +1,39 @@
 package com.onion.base.member;
 
 import java.lang.reflect.Member;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
+
+import com.onion.base.util.MailManager;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
 @Slf4j
-public class MemberService {
+public class MemberService implements UserDetailsService {
 	
 	@Autowired
 	private MemberDAO memberDAO;
+	
+	@Autowired
+	private MailManager mailManager;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public MemberVO getLogin(MemberVO memberVO) throws Exception {
 		return memberDAO.getLogin(memberVO);
@@ -27,21 +41,20 @@ public class MemberService {
 	
 	public int setLastTimeUpdate(HttpSession session) throws Exception {
 		MemberVO memberVO = (MemberVO)session.getAttribute("member");
-		memberVO.setUserName(memberVO.getUserName());
 
 		return memberDAO.setLastTimeUpdate(memberVO);
 	}
 	
 	public int setJoin(MemberVO memberVO) throws Exception {
-		memberVO.setEnabled(true);
+//		memberVO.setEnabled(true);
+		memberVO.setPassword(passwordEncoder.encode(memberVO.getPassword()));
 		int result = memberDAO.setJoin(memberVO);
-		
 		if (result == 0) {
 			return result;
 		}
 		
 		Map<String, Object> map = new HashMap<>();
-		map.put("userName", memberVO.getUserName());
+		map.put("username", memberVO.getUsername());
 		map.put("num", 3);
 		
 		result = memberDAO.setMemberRole(map);
@@ -58,7 +71,7 @@ public class MemberService {
 		
 		boolean check = true;
 		
-		if(memberVO2 == null || !memberVO.getUserName().equals(memberVO2.getUserName())) {
+		if(memberVO2 == null || !memberVO.getUsername().equals(memberVO2.getUsername())) {
 			check = false;
 		}
 		
@@ -89,7 +102,7 @@ public class MemberService {
 				result = true;
 				//에러메시지
 				//bindingResult.rejectvalue("멤버변수명(path)", "message.property(키 값)")
-				bindingResult.rejectValue("userName", "member.userName.duplicate");					
+				bindingResult.rejectValue("username", "member.username.duplicate");					
 			}
 			
 		//4. 생년월일 유효성 검사
@@ -98,10 +111,66 @@ public class MemberService {
 				bindingResult.rejectValue("birth", "member.birth.notBlank");
 			}
 		
-		
-		
-		
 		return result;
 		
 	}
+	
+	public boolean findPasswordCheck(MemberVO memberVO, BindingResult bindingResult) throws Exception {
+		boolean result = false;
+		
+		MemberVO tempUser = memberDAO.getFindPassword();
+		
+		log.error("======== USERNAME  : {} ========", tempUser.getUsername());
+		log.error("======== USEREMAIL  : {} ========", tempUser.getEmail());
+		
+		if(tempUser == null) {
+			
+			result = true;
+			
+			bindingResult.rejectValue("username", "member.findPassword.notExists");
+
+		}
+		
+		return result;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		MemberVO memberVO = new MemberVO();
+		memberVO.setUsername(username);
+		log.error("======================== Spring Security Login =====================");
+		log.error("=============== {} =============", username);
+		try {
+			memberVO = memberDAO.getLogin(memberVO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return memberVO;
+	}
+	
+	public int findPassword(MemberVO memberVO) throws Exception {
+		
+
+		
+		String randomString = "123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		Calendar calendar = Calendar.getInstance();
+		
+		Random random = new Random(calendar.getTimeInMillis());
+		StringBuffer sb = new StringBuffer();
+		
+		for(int i=0; i<6; i++) {
+			int rNum =  random.nextInt(randomString.length());
+			sb.append(randomString.charAt(rNum));
+			
+		}
+		
+		log.error("======== Temp Password : {} ========", sb.toString());
+		
+		return 0;
+		
+	}
+	
+	
 }

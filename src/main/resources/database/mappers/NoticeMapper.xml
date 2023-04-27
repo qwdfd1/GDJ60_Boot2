@@ -83,12 +83,12 @@
  		DELETE FROM NOTICEFILES WHERE NUM = #{num}
  	</delete>
  	
- 	<insert id="setBirthUserInsert">
+ 	<!-- <insert id="setBirthUserInsert">
  		INSERT INTO NOTICE (WRITER, TITLE, CONTENTS, REGDATE, HIT) 
 		VALUES ('qwdfd1', '생일을 축하합니다.', CONCAT((SELECT GROUP_CONCAT(NAME SEPARATOR '님, ') 
 									FROM MEMBER
 									WHERE DATE_FORMAT(BIRTH, '%m-%d') = DATE_FORMAT(NOW(), '%m-%d')) 
 									, '님의 생일을 축하합니다.'), NOW(), 0)
- 	</insert>
+ 	</insert> -->
  	
  </mapper>

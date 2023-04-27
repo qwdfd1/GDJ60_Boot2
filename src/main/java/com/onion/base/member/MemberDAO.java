@@ -23,4 +23,6 @@ public interface MemberDAO {
 	public int setEnabledUpdate() throws Exception;
 	
 	public List<MemberVO> getBirth() throws Exception; 
+	
+	public MemberVO getFindPassword() throws Exception;
 }

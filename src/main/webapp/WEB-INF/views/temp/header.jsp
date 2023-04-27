@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!-- Navigation-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container px-5">
@@ -28,16 +29,21 @@
                     </ul>
                 </li>
                 
-                <c:choose>
-                	<c:when test="${not empty member}">
-		                <li class="nav-item"><a class="nav-link" href="/member/mypage">My Page</a></li>	
-                		<li class="nav-item"><a class="nav-link" href="/member/logout">Logout</a></li>
-                	</c:when>
-                	<c:otherwise>
-               			<li class="nav-item"><a class="nav-link" href="/member/login">Login</a></li>
-               			<li class="nav-item"><a class="nav-link" href="/member/join">Join</a></li>	
-                	</c:otherwise>
-                </c:choose>
+                
+           		<sec:authorize access="isAuthenticated()">
+           			<li class="nav-item"><a class="nav-link" href="/member/mypage">My Page</a></li>	
+            		<li class="nav-item"><a class="nav-link" href="/member/logout">Logout</a></li>
+           		</sec:authorize>
+                        		
+		                
+                	
+				<sec:authorize access="!isAuthenticated()">
+					<li class="nav-item"><a class="nav-link" href="/member/login">Login</a></li>
+           			<li class="nav-item"><a class="nav-link" href="/member/join">Join</a></li>
+				</sec:authorize>                	
+               				
+                	
+                
                 
                 <li class="nav-item"><a class="nav-link" href="/?lang=ko">KO</a></li>
                 <li class="nav-item"><a class="nav-link" href="/?lang=en">EN</a></li>
