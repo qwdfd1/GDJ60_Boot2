@@ -41,7 +41,7 @@
                                 <form id="contactForm" action="/member/login" method="post" data-sb-form-api-token="API_TOKEN">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
-                                        <input class="form-control" id="userName" type="text" name="username" data-sb-validations="required" />
+                                        <input class="form-control" id="userName" type="text" value="${cookie.remember.value}" name="username" data-sb-validations="required" />
                                         <label for="username">USERNAME</label>
                                         <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
                                     </div>
@@ -50,7 +50,13 @@
                                         <input class="form-control" id="password" type="password" name="password" data-sb-validations="required" />
                                         <label for="password">Password</label>
                                         <div class="invalid-feedback" data-sb-feedback="name:required">A name is required.</div>
-                                    </div>    
+                                    </div>
+                                    
+                                    <!-- Name input-->
+                                    <div class="form-floating mb-3">
+                                        <input class="" id="remember" type="checkbox" value="remember" name="remember" data-sb-validations="required" />
+                                        <label for="remember">Remember ID</label>
+                                    </div>        
                                     <!-- Submit success message-->
                                     <!---->
                                     <!-- This is what your users will see when the form-->

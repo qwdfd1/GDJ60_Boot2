@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.stereotype.Controller;
@@ -47,8 +50,12 @@ public class MemberController {
 	}
 	
 	@GetMapping("login")
-	public ModelAndView getLogin(ModelAndView mv) throws Exception {
+	public ModelAndView getLogin(ModelAndView mv, HttpSession session) throws Exception {
+		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
 		mv.setViewName("member/login");
+		if(obj != null) {
+			mv.setViewName("redirect:/");
+		}
 		return mv;
 	}
 	
