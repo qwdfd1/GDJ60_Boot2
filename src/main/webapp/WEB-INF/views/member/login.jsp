@@ -11,6 +11,9 @@
         <title>Modern Business - Start Bootstrap Template</title>
         <!-- css Favicon-->
         <c:import url="../temp/style.jsp"></c:import>
+        <script type="text/javascript">
+        	history.replaceState({}, null, location.pathname)
+        </script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -38,6 +41,11 @@
                                 <!-- To make this form functional, sign up at-->
                                 <!-- https://startbootstrap.com/solution/contact-forms-->
                                 <!-- to get an API token!-->
+                                
+                                <c:if test="${not empty param.errorMessage}">
+                                	<h1>${param.errorMessage}</h1> 
+                                </c:if>
+                                
                                 <form id="contactForm" action="/member/login" method="post" data-sb-form-api-token="API_TOKEN">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">

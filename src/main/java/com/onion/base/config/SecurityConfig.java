@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.onion.base.security.UserLoginFailureHandler;
 import com.onion.base.security.UserLogoutSuccessHandler;
 import com.onion.base.security.UserSuccessHandler;
 
@@ -49,8 +50,7 @@ public class SecurityConfig {
 				.authorizeRequests()
 				//URL과 권한 매칭
 				.antMatchers("/").permitAll()
-				.antMatchers("/member/join").permitAll()
-				.antMatchers("/member/findPassword").permitAll()
+				.antMatchers("/member/*").permitAll()
 				.antMatchers("/member/admin/**").hasRole("ADMIN")
 				.antMatchers("/notice/add").hasRole("ADMIN")
 				.antMatchers("/notice/update").hasRole("ADMIN")
@@ -64,7 +64,8 @@ public class SecurityConfig {
 				.loginPage("/member/login")
 				//.defaultSuccessUrl("/")
 				.successHandler(new UserSuccessHandler())
-				.failureUrl("/member/login")
+//				.failureUrl("/member/login")
+				.failureHandler(new UserLoginFailureHandler())
 				.permitAll()
 				.and()
 			.logout()

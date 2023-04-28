@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,22 +32,37 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping("info")
 	public void info(HttpSession session) {
 		log.error("====================== INFO ===============");
+		
+		String pw = "user1";
+		
+		MemberVO memberVO = (MemberVO)memberService.loadUserByUsername("user1");
+		
+		log.error("====== {} :::::::::", memberVO.getPassword());
+		log.error("====== {} :::::::::", passwordEncoder.encode(pw));
+		log.error("{} ::::::", memberVO.getPassword().equals(passwordEncoder.encode(pw)));
+		
+		boolean check = passwordEncoder.matches(pw, memberVO.getPassword());
+		log.error("{} ::::::", check);
+		
 		
 		// SPRING_SECURITY_CONTEXT : 파라미터 이름
 //		Enumeration<String> names = session.getAttributeNames();
 //		while(names.hasMoreElements()) {
 //			log.error("==== {} =====", names.nextElement());
 //		}
-		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
-		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
-	    Authentication authentication = contextImpl.getAuthentication();
-		log.error("============ {}  ===========", obj);
-		log.error("============ NAME : {}  ===========", authentication.getName());
-		log.error("============ DETAIL : {}  ===========", authentication.getDetails());
-		log.error("============ DETAIL : {}  ===========", authentication.getPrincipal());
+//		Object obj = session.getAttribute("SPRING_SECURITY_CONTEXT");
+//		SecurityContextImpl contextImpl = (SecurityContextImpl)obj;
+//	    Authentication authentication = contextImpl.getAuthentication();
+//		log.error("============ {}  ===========", obj);
+//		log.error("============ NAME : {}  ===========", authentication.getName());
+//		log.error("============ DETAIL : {}  ===========", authentication.getDetails());
+//		log.error("============ DETAIL : {}  ===========", authentication.getPrincipal());
 	}
 	
 	@GetMapping("login")

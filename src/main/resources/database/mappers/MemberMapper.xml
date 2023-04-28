@@ -6,7 +6,7 @@
   <mapper namespace="com.onion.base.member.MemberDAO">
   		
   		<select id="getLogin" parameterType="MemberVO" resultMap="getLoginResult">
-  			SELECT M.USERNAME, M.PASSWORD, M.EMAIL, R.NUM, R.ROLENAME FROM MEMBER M
+  			SELECT M.USERNAME, M.PASSWORD, M.EMAIL, M.ENABLED, R.NUM, R.ROLENAME FROM MEMBER M
   			INNER JOIN
   			MEMBERROLE MR
   			ON(M.USERNAME = MR.USERNAME)
@@ -21,6 +21,7 @@
   			<id property="username" column="USERNAME"/>
   			<result property="password" column="PASSWORD"/>
   			<result property="email" column="EMAIL"/>
+  			<result property="enabled" column="ENABLED"/>
   			<collection property="roleVOs" javaType="List" ofType="RoleVO">
   				<id property="num" column="NUM"/>
   				<result property="roleName" column="ROLENAME"/>

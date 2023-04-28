@@ -34,6 +34,7 @@ public class MemberVO implements UserDetails{
 	@Email
 	private String email;
 	
+	private boolean enabled;
 	
 	@Past
 	private Date birth;
@@ -101,7 +102,7 @@ public class MemberVO implements UserDetails{
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return true;
+		return this.enabled;
 	}
 	
 	

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import com.onion.base.member.MemberDAO;
 import com.onion.base.member.MemberService;
@@ -15,6 +16,7 @@ import com.onion.base.member.MemberService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
 public class UserLogoutSuccessHandler implements LogoutSuccessHandler{
 
 
@@ -23,7 +25,7 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler{
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		log.error("============ logout success handler ===========");
-		MemberService memberService = new MemberService();
+
 		response.sendRedirect("/");
 		
 	}
