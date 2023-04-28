@@ -47,6 +47,7 @@
                                 </c:if>
                                 
                                 <form id="contactForm" action="/member/login" method="post" data-sb-form-api-token="API_TOKEN">
+                                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
                                     <!-- Name input-->
                                     <div class="form-floating mb-3">
                                         <input class="form-control" id="userName" type="text" value="${cookie.remember.value}" name="username" data-sb-validations="required" />
@@ -88,6 +89,7 @@
                                 
                                 <div class="d-flex justify-content-end my-3">
                                 	<a class="btn btn-primary btn-md" href="./findPassword">Forgot Password</a>
+                                	<a class="btn btn-primary btn-md" href="/oauth2/authorization/kakao">Kakao Login</a>
                                 </div>
                             </div>
                         </div>

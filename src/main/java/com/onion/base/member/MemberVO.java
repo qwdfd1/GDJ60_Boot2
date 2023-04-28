@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -13,13 +14,14 @@ import javax.validation.constraints.Size;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class MemberVO implements UserDetails{
+public class MemberVO implements UserDetails, OAuth2User{
 	@NotBlank
 	private String username;
 	@Size(min = 5)
@@ -41,6 +43,10 @@ public class MemberVO implements UserDetails{
 	
 	
 	private List<RoleVO> roleVOs;
+	
+	//Oauth2User, token 정보 저장
+	private Map<String, Object> attributes;
+	
 
 	//Role을 리턴
 	//? extends GrantedAuthority : 무엇
@@ -104,6 +110,10 @@ public class MemberVO implements UserDetails{
 		// TODO Auto-generated method stub
 		return this.enabled;
 	}
+
+
+	
+	
 	
 	
 }

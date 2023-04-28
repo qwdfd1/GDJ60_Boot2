@@ -25,7 +25,7 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler{
 			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		log.error("============ logout success handler ===========");
-
+		
 		response.sendRedirect("/");
 		
 	}

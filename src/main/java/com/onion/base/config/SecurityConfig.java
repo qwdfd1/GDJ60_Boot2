@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,6 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import com.onion.base.member.MemberService;
+import com.onion.base.member.MemberSocialService;
 import com.onion.base.security.UserLoginFailureHandler;
 import com.onion.base.security.UserLogoutSuccessHandler;
 import com.onion.base.security.UserSuccessHandler;
@@ -24,6 +27,9 @@ import com.onion.base.security.UserSuccessHandler;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	
+	@Autowired
+	private MemberSocialService memberSocialService;
 
 	
 	@Bean
@@ -44,21 +50,22 @@ public class SecurityConfig {
 	SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
 		httpSecurity
 				.cors()
+//				.disable()
 				.and()
 				.csrf()
 				.disable()
-				.authorizeRequests()
+			.authorizeRequests()
 				//URL과 권한 매칭
 				.antMatchers("/").permitAll()
 				.antMatchers("/member/*").permitAll()
 				.antMatchers("/member/admin/**").hasRole("ADMIN")
-				.antMatchers("/notice/add").hasRole("ADMIN")
+				.antMatchers("/notice/add").hasRole("MEMBER")
 				.antMatchers("/notice/update").hasRole("ADMIN")
 				.antMatchers("/notice/delete").hasRole("ADMIN")
 				.antMatchers("/notice/*").permitAll()				
 				// 멤버등급 테이블구조에서 회원이 하나의 ROLE만 가지고 있을 때 hasAnyRole 메서드 사용
 				.antMatchers("/qna/add").hasAnyRole("ADMIN", "MANAGER", "MEMBER")
-				.anyRequest().authenticated()
+				.anyRequest().permitAll()
 				.and()
 			.formLogin()
 				.loginPage("/member/login")
@@ -75,8 +82,16 @@ public class SecurityConfig {
 				.invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID")
 				.permitAll()
+				.and()
+				.oauth2Login()
+				.userInfoEndpoint()
+				.userService(memberSocialService)
 				;
 				
+//			.sessionManagement()
+//				.maximumSessions(1) // 최대 허용가능한 Session의 갯수
+//				.maxSessionsPreventsLogin(false) // false : 이전 사용자 세션 만료, true : 새로운 사용자 인증 실패
+		
 		return httpSecurity.build();
 	}
 	
