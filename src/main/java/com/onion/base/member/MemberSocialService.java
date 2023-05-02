@@ -42,7 +42,7 @@ public class MemberSocialService extends DefaultOAuth2UserService {
 	private OAuth2User socialJoinCheck(OAuth2UserRequest auth2UserRequest) {
 		
 		//DB예서 조회 후 회원추가 또는 회원정보(Role) 조회
-		//KAKAO에서 받은 저오를 MemberVO로 변경
+		//KAKAO에서 받은 정보를 MemberVO로 변경
 		
 		OAuth2User user = super.loadUser(auth2UserRequest);
 		
@@ -60,6 +60,8 @@ public class MemberSocialService extends DefaultOAuth2UserService {
 		
 		MemberVO memberVO = new MemberVO();
 		memberVO.setUsername(hashMap.get("nickname").toString());
+		
+		memberVO.setAttributes(map);
 		
 		List<RoleVO> roleVOs = new ArrayList<>();
 		RoleVO roleVO = new RoleVO();

@@ -89,18 +89,18 @@ public class MemberController {
 //		return mv;
 //	}
 	
-	@GetMapping("logout")
-	public ModelAndView getLogout(ModelAndView mv, HttpSession session) throws Exception {
-			
-		int result = memberService.setLastTimeUpdate(session);
-		if(result > 0) {
-			session.invalidate();
-		}
-
-		mv.setViewName("redirect:../");
-		
-		return mv;
-	}
+//	@GetMapping("socialLogout")
+//	public ModelAndView getLogout(ModelAndView mv, HttpSession session) throws Exception {
+//			
+////		int result = memberService.setLastTimeUpdate(session);
+////		if(result > 0) {
+////			session.invalidate();
+////		}
+//
+//		mv.setViewName("redirect:../");
+//		
+//		return mv;
+//	}
 	
 	@GetMapping("join")
 	public ModelAndView setJoin(ModelAndView mv, MemberVO memberVO) throws Exception {

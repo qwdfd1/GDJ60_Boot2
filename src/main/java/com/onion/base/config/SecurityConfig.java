@@ -21,6 +21,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import com.onion.base.member.MemberService;
 import com.onion.base.member.MemberSocialService;
 import com.onion.base.security.UserLoginFailureHandler;
+import com.onion.base.security.UserLogoutHandler;
 import com.onion.base.security.UserLogoutSuccessHandler;
 import com.onion.base.security.UserSuccessHandler;
 
@@ -30,6 +31,12 @@ public class SecurityConfig {
 	
 	@Autowired
 	private MemberSocialService memberSocialService;
+	
+	@Autowired
+	private UserLogoutHandler userLogoutHandler;
+	
+	@Autowired
+	private UserLogoutSuccessHandler userLogoutSuccessHandler;
 
 	
 	@Bean
@@ -78,7 +85,8 @@ public class SecurityConfig {
 			.logout()
 				.logoutUrl("/member/logout")
 //				.logoutSuccessUrl("/")
-				.logoutSuccessHandler(new UserLogoutSuccessHandler())
+				.addLogoutHandler(userLogoutHandler)
+				.logoutSuccessHandler(userLogoutSuccessHandler)
 				.invalidateHttpSession(true)
 				.deleteCookies("JSESSIONID")
 				.permitAll()
